@@ -1,0 +1,32 @@
+{
+  "1": {
+    "name": "king arthur",
+    "password": "password1",
+    "profession": "king",
+    "id": 1
+  },
+  "2": {
+    "name": "rob kendal",
+    "password": "password3",
+    "profession": "code fiddler",
+    "id": 2
+  },
+  "3": {
+    "name": "teresa may",
+    "password": "parliament",
+    "profession": "brexit killer",
+    "id": 3
+  },
+  "1622998655213": {
+    "name": "king arthur1",
+    "password": "password12",
+    "profession": "king1",
+    "stupid": "really"
+  },
+  "1623001090250": {
+    "name": "king arthur1",
+    "password": "password12",
+    "profession": "king1",
+    "stupid": "really"
+  }
+}
