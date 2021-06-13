@@ -1,8 +1,7 @@
 import React, {useState, useEffect} from 'react';
 import Button from 'react-bootstrap/Button';
-import { useSelector, useDispatch } from 'react-redux';
-import { status, title, taskconfig, priority } from './store/taskSlice';
-import {stateTask, stateTasks} from './stateTask';
+import configServerUrl from './config';
+import {stateTask, stateGetTaskById, stateSetTask, stateCurrTaskId} from './stateTask';
 
 function simulateNetworkRequest() {
   return new Promise((resolve) => setTimeout(resolve, 2000));
@@ -14,41 +13,37 @@ function LoadingButton(props) {
     const [isLoaded, setIsLoaded] = useState(false);
     const [items, setItems] = useState([]);
     const [ids, setIds] = useState([]);
-    console.log('LoadingButton.props');
-    console.log(props);
+
     
   useEffect(() => {
-    const currTask = stateTask.getTaskById(props.data.item.systemid);
+    console.log('LoadingButton.props.data');
+    console.log(props.data);
+    
+    const currTask = stateGetTaskById(props.data.item.systemtaskid); //stateTask.getTaskById(props.data.item.systemtaskid);
+    const id = props.data.item.systemtaskid !== 0 ? props.data.item.systemtaskid : Date.now().toString();
+    if(props.data.item.systemtaskid === 0)  currTask.systemtaskid = id;
+    console.log('props.data.item.systemtaskid');
+    console.log(props.data.item.systemtaskid);
+    console.log('LoadingButton.currTask');
+    console.log(currTask);
     const requestOptions = {
-        method: 'POST',
+        method: 'PUT',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(currTask)
-        /*body: JSON.stringify({ 
-          systemid: props.data.item.systemid, 
-          status: props.data.item.status, 
-          title: props.data.item.title, 
-          taskconfig: props.data.item.taskconfig, 
-          priority: props.data.item.priority 
-        })*/
     };
+    
+    
     if (isLoading) {
-        fetch("http://localhost:3001/tasks/", requestOptions)
+        fetch(configServerUrl + "/tasks/" + id, requestOptions)
         .then(res => {  
-          console.log(res);
-          console.log('LoadingButton.useEffect'); 
           return res;
         })
         .then(
           (result) => {
             setLoading(false);
-              console.log('TaskGet.fetch.result');
-              console.log(result);
-              console.log('TaskGet.fetch.Object.values(result)');
-              console.log(Object.values(result));
+              
             setIsLoaded(true);
-            //setItems(Object.values(result));
-            //setItems([{name: "test"}, {name: "stupid"}]);
-            //setIds(Object.keys(result));
+
           },
           // Note: it's important to handle errors here
           // instead of a catch() block so that we don't swallow
@@ -62,53 +57,22 @@ function LoadingButton(props) {
           }
         )
     }
-  }, [isLoading, props.data.item.priority, props.data.item.status, props.data.item.systemid, props.data.item.taskconfig, props.data.item.title]);
+  }, [isLoading, props.data, props.data.item.priority, props.data.item.status, props.data.item.systemid, props.data.item.taskconfig, props.data.item.title]);
 
-  /*
-  const status = useSelector(state => task.status.value);
-  const title = useSelector(state => task.title.value);
-  const taskconfig = useSelector(state => task.taskconfig.value);
-  const priority = useSelector(state => task.priority.value);
-  const dispatch = useDispatch();
-*/
-  let [task, setTask] = useState({
-    status: '',
-    title: '',
-    taskconfig: '',
-    priority: ''
-  })
   const handleClick = (event) => {
+    let systemtaskid = stateCurrTaskId;
     setLoading(true);
-    stateTask.pushTask(stateTask);
-    console.log('global.stateTasks');
-    console.log(stateTasks);
-    /*let value = event.target.value;
-      let heading = 'test';//event.target.attributes["heading"].value;
-      console.log('h');
-      console.log(event.target);
-    
-      setTask((prevalue) => {
-        console.log('setTask');
-        console.log({
-          ...prevalue,   // Spread Operator               
-          [heading]: value
-        });
-        return {
-          ...prevalue,   // Spread Operator               
-          [heading]: value
-        }
-      });
-      */
+    stateTask.pushTask(stateGetTaskById(systemtaskid));
   };
-
 
   return (
     <Button
-      variant="primary"
+      variant= {props.action === 'save' ? "primary" : "secondary"}
       disabled={isLoading}
       onClick={!isLoading ? handleClick : null}
+      action={props.action}
     >
-      {isLoading ? 'Saving..' : 'Save'}
+      {isLoading ? 'Saving..' : props.action}
     </Button>
   );
 }

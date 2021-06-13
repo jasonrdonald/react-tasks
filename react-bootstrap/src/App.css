@@ -10,3 +10,87 @@
     margin-right: 1rem;
   }
   
+  td.tdcontent {
+    word-wrap: break-word;
+    overflow: scroll;
+  }
+/* Mobile Portrait */
+@media only screen 
+  and (min-device-width: 300px) 
+  and (max-device-width: 700px)
+  and (-webkit-min-device-pixel-ratio: 2)
+  and (orientation: portrait) {
+    td.tdcontent div{
+      max-width: 130px;
+    }
+}
+
+/* Mobile Landscape */
+@media only screen 
+  and (min-device-width: 300px) 
+  and (max-device-width: 700px)
+  and (-webkit-min-device-pixel-ratio: 2)
+  and (orientation: landscape) {
+
+    td.tdcontent div{
+      max-width: 400px;
+    }
+}
+
+/* Tab Portrait */
+@media only screen 
+  and (min-device-width: 700px) 
+  and (max-device-width: 1024px)
+  and (-webkit-min-device-pixel-ratio: 2)
+  and (orientation: portrait) {
+    td.tdcontent div{
+      max-width: 500px;
+    }
+}
+
+/* Tab Landscape */
+@media only screen 
+  and (min-device-width: 700px) 
+  and (max-device-width: 1024px)
+  and (-webkit-min-device-pixel-ratio: 2)
+  and (orientation: landscape) {
+
+    td.tdcontent div{
+      max-width: 700px;
+    }
+}
+
+  td.tdhead{
+    width: 25%;
+    font-weight: bold;
+    font-variant: initial;
+  }
+  td.tdempty{
+    font-style: italic;
+    font-weight: lighter;
+    font-stretch: ultra-condensed;
+    color:gray
+  }
+
+  .optionplaceholder
+  {
+    font-style: italic;
+    font-weight: lighter;
+    font-stretch: ultra-condensed;
+    color:gray
+  }
+
+  .thtemplate
+  {
+    font-style: italic;
+    font-weight: lighter;
+    font-stretch: ultra-condensed;
+    color:lightskyblue;
+    float: right;
+  }
+
+  th.section{
+    text-align: center;
+    background-color:rgba(0, 0, 0, 0.575);
+    color: lightgray;
+  }
