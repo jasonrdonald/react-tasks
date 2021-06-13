@@ -1,5 +1,6 @@
 {
   "1": {
+    "recordtype": "template",
     "systemtaskid": 0,
     "status": "<Choose Task-Status>",
     "title": "<Enter Data>",
@@ -7,24 +8,11 @@
     "priority": "<Choose Priority>"
   },
   "2": {
+    "recordtype": "template",
     "systemtaskid": 0,
     "status": "<Choose Task-Status>",
     "title": "<Enter Data>",
     "taskconfig": "<Choose task-config>",
     "priority": "<Choose Priority>"
-  },
-  "1623526535320": {
-    "systemtaskid": 1,
-    "status": "new",
-    "title": "",
-    "taskconfig": "Bills",
-    "priority": "Daily"
-  },
-  "1623526880802": {
-    "systemtaskid": 2,
-    "status": "inprogress",
-    "title": "",
-    "taskconfig": "Bills",
-    "priority": "Weekly"
   }
 }

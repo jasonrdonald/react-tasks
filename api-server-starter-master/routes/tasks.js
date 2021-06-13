@@ -47,8 +47,9 @@ const userRoutes = (app, fs) => {
             const newUserId = Date.now().toString();
 
             // add the new user
+            if(req.body.systemtaskid !== undefined) req.body.systemtaskid = newUserId;
             data[newUserId.toString()] = req.body;
-
+            
             writeFile(JSON.stringify(data, null, 2), () => {
                 res.status(200).send('new user added');
             });
@@ -58,12 +59,12 @@ const userRoutes = (app, fs) => {
 
 
     // UPDATE
-    app.put('/tasks/:id', cors(), (req, res) => {
+    app.put('/tasks/:systemtaskid', cors(), (req, res) => {
 
         readFile(data => {
 
             // add the new user
-            const userId = req.params["id"];
+            const userId = req.params["systemtaskid"];
             data[userId] = req.body;
 
             writeFile(JSON.stringify(data, null, 2), () => {
@@ -75,12 +76,12 @@ const userRoutes = (app, fs) => {
 
 
     // DELETE
-    app.delete('/tasks/:id', cors(), (req, res) => {
+    app.delete('/tasks/:systemtaskid', cors(), (req, res) => {
 
         readFile(data => {
 
             // add the new user
-            const userId = req.params["id"];
+            const userId = req.params["systemtaskid"];
             delete data[userId];
 
             writeFile(JSON.stringify(data, null, 2), () => {
