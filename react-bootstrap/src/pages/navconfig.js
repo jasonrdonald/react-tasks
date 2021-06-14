@@ -3,13 +3,23 @@ import Card from 'react-bootstrap/Card';
 import Button from 'react-bootstrap/Button';
 import React from 'react';
 import Container from 'react-bootstrap/Container';
+import {Reacttable} from '../table';
+import {systempriority, 
+  systemtaskbuckets, 
+  systemfrequency, 
+  systemfinancecategory, 
+  systeminputtaskfinancecategory, 
+  systeminputtaskconfig, 
+  systemtaskstatus, 
+  inputtasks, 
+  systemtaskhistory} from '../datastore';
 
-const Accordions = () => {
+const ConfigPage = () => {
   
 return (
-  <Container>
+    <Container>
   <Accordion defaultActiveKey="0">
-  <Card>
+<Card>
     <Card.Header>
       <Accordion.Toggle as={Button} variant="link" eventKey="0">
         Priority (system)
@@ -17,7 +27,7 @@ return (
     </Card.Header>
     <Accordion.Collapse eventKey="0">
       <Card.Body>
-      <div id="systempriority"></div>
+      <Reacttable id="1" data={systempriority} />
       </Card.Body>
     </Accordion.Collapse>
   </Card>
@@ -29,7 +39,8 @@ return (
     </Card.Header>
     <Accordion.Collapse eventKey="1">
       <Card.Body>
-      <div id="systemtaskbuckets" ></div>
+      <Reacttable id="2" data={systemtaskbuckets} />
+      
       </Card.Body>
     </Accordion.Collapse>
   </Card>
@@ -41,7 +52,7 @@ return (
     </Card.Header>
     <Accordion.Collapse eventKey="2">
       <Card.Body>
-      <div id="systemfrequency"></div>
+      <Reacttable id="3" data={systemfrequency} />
       </Card.Body>
     </Accordion.Collapse>
   </Card>
@@ -53,7 +64,7 @@ return (
     </Card.Header>
     <Accordion.Collapse eventKey="3">
       <Card.Body>
-      <div id="systemfinancecategory"></div>
+      <Reacttable id="4" data={systemfinancecategory} />
       </Card.Body>
     </Accordion.Collapse>
   </Card>
@@ -65,7 +76,7 @@ return (
     </Card.Header>
     <Accordion.Collapse eventKey="4">
       <Card.Body>
-      <div id="systeminputtaskfinancecategory"></div>
+      <Reacttable id="5" data={systeminputtaskfinancecategory} formname="systeminputtaskfinancecategory"/>
       </Card.Body>
     </Accordion.Collapse>
   </Card>
@@ -77,7 +88,7 @@ return (
     </Card.Header>
     <Accordion.Collapse eventKey="5">
       <Card.Body>
-      <div id="systeminputtaskconfig"></div>
+      <Reacttable id="6" data={systeminputtaskconfig} formname="systeminputtaskconfig" />
       </Card.Body>
     </Accordion.Collapse>
   </Card>
@@ -89,37 +100,13 @@ return (
     </Card.Header>
     <Accordion.Collapse eventKey="6">
       <Card.Body>
-      <div id="systemtaskstatus"></div>
+      <Reacttable id="7" data={systemtaskstatus} />
       </Card.Body>
     </Accordion.Collapse>
   </Card>
-  <Card>
-    <Card.Header>
-      <Accordion.Toggle as={Button} variant="link" eventKey="7">
-        Tasks (user)
-      </Accordion.Toggle>
-    </Card.Header>
-    <Accordion.Collapse eventKey="7">
-      <Card.Body>
-      <div id="inputtasks"></div>
-      </Card.Body>
-    </Accordion.Collapse>
-  </Card>
-  <Card>
-    <Card.Header>
-      <Accordion.Toggle as={Button} variant="link" eventKey="8">
-        Task History (system-generated)
-      </Accordion.Toggle>
-    </Card.Header>
-    <Accordion.Collapse eventKey="8">
-      <Card.Body>
-      <div id="systemtaskhistory"></div>
-      </Card.Body>
-    </Accordion.Collapse>
-  </Card>
-</Accordion>
+  </Accordion>
 </Container>
-    );
-}
-
-export default Accordions;
+      );
+    }
+    
+    export default ConfigPage;
